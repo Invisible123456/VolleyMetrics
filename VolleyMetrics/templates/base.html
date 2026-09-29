@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>VolleyMetrics</title>
+    </head>
+    <body>
+        <h1>VolleyMetrics</h1>
+        {% block content %}{% endblock content %}
+        {% if user.is_authenticated %}
+            <p>Vous êtes connecté en tant que {{ request.user }}.</p>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Déconnexion</button>
+            </form>
+            
+        {% endif %}
+    </body>
+</html>
