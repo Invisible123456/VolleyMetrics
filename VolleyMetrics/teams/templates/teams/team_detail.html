@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}{{ team.name }} - VolleyMetrics{% endblock title %}
+
+{% block content %}
+
+<p>
+    <a href="{% url 'team_list' %}">
+        ← Mes équipes
+    </a>
+</p>
+
+<h2>{{ team.name }}</h2>
+
+<p>
+    <strong>Club :</strong> {{ team.club }}
+</p>
+
+<p>
+    <strong>Saison :</strong> {{ team.season }}
+</p>
+
+<h3>Membres</h3>
+
+{% if memberships %}
+    <ul>
+        {% for membership in memberships %}
+            <li>
+                {{ membership.user.get_full_name|default:membership.user.username }}
+
+                {% if membership.user.role == "COACH" %}
+                    — Coach
+                {% else %}
+                    — Joueur
+
+                    {% if membership.number %}
+                        — #{{ membership.number }}
+                    {% endif %}
+                {% endif %}
+
+                {% if user.role == "COACH" %}
+                    <form
+                        method="post"
+                        action="{% url 'remove_member' team.id membership.id %}"
+                    >
+                        {% csrf_token %}
+                        <button type="submit">
+                            Retirer
+                        </button>
+                    </form>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun membre dans cette équipe.</p>
+{% endif %}
+
+{% if user.role == "COACH" %}
+    <p>
+        <a href="{% url 'add_member' team.id %}">
+            Ajouter un membre
+        </a>
+    </p>
+{% endif %}
+
+{% endblock content %}

@@ -1,4 +1,37 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% block title %}Accueil - VolleyMetrics{% endblock title %}
+
 {% block content %}
-    <p>Vous êtes connecté !</p>
+
+<h2>Accueil</h2>
+
+<p>
+    Bienvenue,
+    {{ user.get_full_name|default:user.username }}.
+</p>
+
+<p>
+    Votre rôle :
+    {{ user.get_role_display }}
+</p>
+
+<h3>Navigation</h3>
+
+<ul>
+    <li>
+        <a href="{% url 'team_list' %}">
+            Voir mes équipes
+        </a>
+    </li>
+
+    {% if user.role == "COACH" %}
+        <li>
+            <a href="{% url 'create_team' %}">
+                Créer une équipe
+            </a>
+        </li>
+    {% endif %}
+</ul>
+
 {% endblock content %}

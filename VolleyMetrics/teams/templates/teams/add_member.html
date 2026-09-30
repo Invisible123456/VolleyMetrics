@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter un membre - VolleyMetrics{% endblock title %}
+
+{% block content %}
+
+<p>
+    <a href="{% url 'team_detail' team.id %}">
+        ← Retour à {{ team.name }}
+    </a>
+</p>
+
+<h2>Ajouter un membre</h2>
+
+<p>
+    Équipe :
+    <strong>{{ team.name }}</strong>
+</p>
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Ajouter le membre
+    </button>
+</form>
+
+{% endblock content %}

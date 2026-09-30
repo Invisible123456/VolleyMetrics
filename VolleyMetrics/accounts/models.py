@@ -4,13 +4,13 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     COACH = 'COACH'
     JOUEUR = 'JOUEUR'
-    DEV = 'DEV'
+    ADMIN = 'ADMIN'
 
     ROLE_CHOICES = (
         (COACH, 'Coach'),
         (JOUEUR, 'Joueur'),
-        (DEV, 'DEV')
+        (ADMIN, 'Admin')
     )
-    role = models.CharField(max_length=30, choices=ROLE_CHOICES, verbose_name='Rôle')
+    role = models.CharField(max_length=30, choices=ROLE_CHOICES, verbose_name='Rôle', default="JOUEUR")
     
 

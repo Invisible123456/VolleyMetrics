@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Mes équipes - VolleyMetrics{% endblock title %}
+
+{% block content %}
+
+<h2>Mes équipes</h2>
+
+{% if user.role == "COACH" %}
+    <p>
+        <a href="{% url 'create_team' %}">
+            Créer une équipe
+        </a>
+    </p>
+{% endif %}
+
+{% if teams %}
+    <ul>
+        {% for team in teams %}
+            <li>
+                <a href="{% url 'team_detail' team.id %}">
+                    {{ team.name }}
+                </a>
+
+                — {{ team.club }}
+                — {{ team.season }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Vous n'appartenez à aucune équipe.</p>
+{% endif %}
+
+<p>
+    <a href="{% url 'home' %}">
+        ← Retour à l'accueil
+    </a>
+</p>
+
+{% endblock content %}

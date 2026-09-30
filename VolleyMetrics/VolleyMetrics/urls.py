@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 
-import accounts.urls, dashboard.urls
+import accounts.urls, dashboard.urls, teams.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("accounts.urls")),
     path('', include("dashboard.urls")),
+    path('teams/', include("teams.urls")),
 ]

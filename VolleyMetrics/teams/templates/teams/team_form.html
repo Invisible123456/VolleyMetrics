@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Créer une équipe - VolleyMetrics{% endblock title %}
+
+{% block content %}
+
+<h2>Créer une équipe</h2>
+
+<p>
+    <a href="{% url 'team_list' %}">
+        ← Mes équipes
+    </a>
+</p>
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Créer l'équipe
+    </button>
+</form>
+
+{% endblock content %}
